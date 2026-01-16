@@ -6,65 +6,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
 <style>
-body{
-margin:0;
-font-family:Poppins,sans-serif;
-background:#fffaf2;
-color:#2b261f;
-}
+body{margin:0;font-family:Poppins;background:#fffaf2;color:#2b261f}
 section{padding:90px 20px;text-align:center}
 h1,h2{font-family:'Playfair Display',serif;color:#c9a24d}
-.hero{
-min-height:100vh;
-background:url('foto/cover.jpg') center/cover fixed;
-display:flex;
-align-items:center;
-justify-content:center;
-color:#fff;
-}
-.card{
-background:#fff;
-max-width:900px;
-margin:40px auto;
-padding:50px;
-border-radius:26px;
-box-shadow:0 20px 60px rgba(0,0,0,.15);
-}
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-gap:16px;
-}
-.grid img{
-width:100%;
-height:220px;
-object-fit:cover;
-border-radius:18px;
-}
-input,textarea{
-width:100%;
-padding:14px;
-border-radius:12px;
-border:1px solid #ddd;
-margin-bottom:14px;
-font-family:Poppins;
-}
-button{
-padding:14px 36px;
-border-radius:40px;
-border:none;
-background:linear-gradient(135deg,#d4af37,#b8962e);
-color:#fff;
-font-size:15px;
-cursor:pointer;
-}
-.ucapan{
-text-align:left;
-border-bottom:1px solid #eee;
-padding:12px 0;
-}
+.hero{min-height:100vh;background:url('foto/cover.jpg') center/cover fixed;display:flex;align-items:center;justify-content:center;color:#fff}
+.card{background:#fff;max-width:900px;margin:40px auto;padding:50px;border-radius:26px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+.grid img{width:100%;height:220px;object-fit:cover;border-radius:18px}
+input,textarea{width:100%;padding:14px;border-radius:12px;border:1px solid #ddd;margin-bottom:14px}
+button{padding:14px 36px;border-radius:40px;border:none;background:linear-gradient(135deg,#d4af37,#b8962e);color:#fff;cursor:pointer}
+.ucapan{text-align:left;border-bottom:1px solid #eee;padding:12px 0}
+.copy{cursor:pointer;color:#c9a24d;font-weight:600}
+.qris{max-width:220px;cursor:pointer}
+#popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);align-items:center;justify-content:center}
+#popup img{max-width:300px;border-radius:20px}
 small{color:#888}
 </style>
 </head>
@@ -74,25 +32,25 @@ small{color:#888}
 <audio id="musik" src="musik/lagu.mp3" loop></audio>
 
 <section class="hero">
-<div>
+<div data-aos="zoom-in">
 <h1>Walimatul ‘Urs</h1>
-<p>Charly Handani & Pasangan</p>
-<p>Sabtu, 20 April 2026</p>
+<p id="tamu">Tamu Undangan</p>
+<p>Sabtu, 15 Februari 2026</p>
 <button onclick="play()">Buka Undangan</button>
 </div>
 </section>
 
-<section>
+<section data-aos="fade-up">
 <h2>Akad Nikah</h2>
-<p>Sabtu, 20 April 2026<br>Pukul 08.00 WIB<br>Kediaman Mempelai Wanita</p>
+<p>07.00 WIB<br>KUA Kec. Concong</p>
 </section>
 
-<section>
-<h2>Resepsi Pernikahan</h2>
-<p>Pukul 11.00 – 16.00 WIB<br>Balai Adat Melayu, Indragiri Hilir</p>
+<section data-aos="fade-up">
+<h2>Resepsi</h2>
+<p>11.00 – 17.00 WIB<br>Kediaman Mempelai Wanita</p>
 </section>
 
-<section>
+<section data-aos="fade-up">
 <h2>Galeri</h2>
 <div class="grid">
 <img src="foto/galeri1.jpg">
@@ -102,104 +60,78 @@ small{color:#888}
 </div>
 </section>
 
-<section>
-<h2>Lokasi Acara</h2>
-<iframe
-src="https://www.google.com/maps?q=Balai+Adat+Melayu+Indragiri+Hilir&output=embed"
-width="100%" height="320" style="border:0;border-radius:18px">
-</iframe>
-</section>
-
-<section>
-<div class="card">
+<section data-aos="fade-up">
 <h2>Tanda Kasih</h2>
-<img src="foto/qris.png" style="max-width:220px;border-radius:16px"><br><br>
-<p>DANA: 08XXXXXXXX<br>GoPay: 08XXXXXXXX<br>SeaBank: 1234567890</p>
+<div class="card">
+<img src="foto/qris.png" class="qris" onclick="popup(true)">
+<p class="copy" onclick="copy('082261467360')">DANA: 082261467360</p>
+<p class="copy" onclick="copy('082261467360')">GoPay: 082261467360</p>
+<p class="copy" onclick="copy('901163062173')">SeaBank: 901163062173</p>
 </div>
 </section>
 
-<section>
+<section data-aos="fade-up">
 <div class="card">
 <h2>Ucapan & Doa</h2>
 <input id="nama" placeholder="Nama">
-<textarea id="pesan" placeholder="Tulis ucapan..."></textarea>
-<button onclick="kirimUcapan()">Kirim Ucapan</button>
+<textarea id="pesan" placeholder="Tulis ucapan"></textarea>
+<button onclick="kirim()">Kirim</button>
 <div id="listUcapan"></div>
 </div>
 </section>
 
-<!-- FIREBASE -->
+<div id="popup" onclick="popup(false)">
+<img src="foto/qris.png">
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 <script>
-// ===== FIREBASE INIT =====
-const firebaseConfig = {
-  apiKey: "AIzaSyCr2VF6hZ3pLWU5eORdrtdM1c5L_AcLVH4",
-  authDomain: "undangan-pernikahan-f6d5e.firebaseapp.com",
-  databaseURL: "https://undangan-pernikahan-f6d5e-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "undangan-pernikahan-f6d5e"
+AOS.init({duration:1200,once:true});
+
+const firebaseConfig={
+apiKey:"AIzaSyCr2VF6hZ3pLWU5eORdrtdM1c5L_AcLVH4",
+authDomain:"undangan-pernikahan-f6d5e.firebaseapp.com",
+databaseURL:"https://undangan-pernikahan-f6d5e-default-rtdb.asia-southeast1.firebasedatabase.app",
+projectId:"undangan-pernikahan-f6d5e"
 };
 firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+const db=firebase.database();
 
-// ===== MUSIK =====
-function play(){
-document.getElementById("musik").play();
+const WA_NUMBER="628XXXXXXXXXX";
+const WA_APIKEY="APIKEY_KAMU";
+
+const device=localStorage.device||("dev-"+Math.random().toString(36).substr(2));
+localStorage.device=device;
+
+function play(){musik.play()}
+function popup(s){popup.style.display=s?"flex":"none"}
+function copy(t){navigator.clipboard.writeText(t);alert("Disalin")}
+
+function kirim(){
+const n=nama.value.trim(), p=pesan.value.trim();
+if(n.length<3||p.length<5) return alert("Lengkapi");
+
+const data={nama:n,pesan:p,waktu:Date.now(),device};
+db.ref("ucapan").push(data);
+
+fetch(`https://api.callmebot.com/whatsapp.php?phone=${WA_NUMBER}&text=Ucapan%20Baru%20${n}%20:%20${p}&apikey=${WA_APIKEY}`);
+
+pesan.value="";
 }
 
-// ===== ANTI SPAM =====
-const deviceKey = localStorage.getItem("deviceKey") ||
-("dev-" + Math.random().toString(36).substr(2,9));
-localStorage.setItem("deviceKey", deviceKey);
-
-const LIMIT = 3;
-const DELAY = 30000;
-
-// ===== KIRIM UCAPAN =====
-function kirimUcapan(){
-const nama = document.getElementById("nama").value.trim();
-const pesan = document.getElementById("pesan").value.trim();
-
-if(nama.length < 3) return alert("Nama minimal 3 huruf");
-if(pesan.length < 5) return alert("Ucapan terlalu singkat");
-
-db.ref("ucapan").orderByChild("device").equalTo(deviceKey)
-.once("value", snap=>{
-if(snap.numChildren() >= LIMIT)
-return alert("Batas ucapan tercapai");
-
-db.ref("ucapan").orderByChild("waktu").limitToLast(1)
-.once("value", last=>{
-let lastTime = 0;
-last.forEach(s=>lastTime = s.val().waktu);
-if(Date.now() - lastTime < DELAY)
-return alert("Tunggu 30 detik sebelum kirim lagi");
-
-db.ref("ucapan").push({
-nama:nama,
-pesan:pesan,
-waktu:Date.now(),
-device:deviceKey
+db.ref("ucapan").on("child_added",s=>{
+const d=s.val();
+listUcapan.prepend(Object.assign(document.createElement("div"),{
+className:"ucapan",
+innerHTML:`<b>${d.nama}</b><br>${d.pesan}<br><small>${new Date(d.waktu).toLocaleString()}</small>`
+}));
 });
 
-document.getElementById("pesan").value="";
-});
-});
-}
-
-// ===== LOAD UCAPAN REALTIME =====
-db.ref("ucapan").on("child_added", snap=>{
-const d = snap.val();
-const div = document.createElement("div");
-div.className = "ucapan";
-div.innerHTML = `
-<b>${d.nama}</b><br>
-${d.pesan}<br>
-<small>${new Date(d.waktu).toLocaleString()}</small>
-`;
-document.getElementById("listUcapan").prepend(div);
-});
+const params=new URLSearchParams(location.search);
+if(params.get("to")) document.getElementById("tamu").innerText="Yth. "+params.get("to");
 </script>
 
 </body>
