@@ -33,7 +33,7 @@ color:var(--emas);
 
 .hero{
 min-height:100vh;
-background:#222;
+background:url('foto/cover.jpg') center/cover no-repeat;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -76,12 +76,22 @@ color:#fff;
 
 .grid{
 display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:16px;
 }
 
-@media(max-width:640px){
-.grid{grid-template-columns:1fr}
+.grid img{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:16px;
+}
+.rek{
+border:1px solid #eee;
+border-radius:16px;
+padding:16px;
+margin:12px 0;
+cursor:pointer;
 }
 </style>
 </head>
@@ -102,81 +112,36 @@ gap:20px;
 <!-- HERO -->
 <section class="hero">
 <div>
-<h1>THE ENGAGEMENT OF</h1>
+<h1>Walimatul ‘Urs</h1>
 <p>Charly Handani & Pasangan</p>
 <p>Sabtu, 20 April 2026</p>
 </div>
 </section>
 
-<!-- ADAT -->
+<!-- GALERI -->
 <section>
-<div class="card">
-<h2>Adat Melayu</h2>
-<p>
-Dengan menjunjung tinggi adat dan syariat Melayu Riau,
-pernikahan ini dilaksanakan dalam suasana penuh marwah,
-berlandaskan adat bersendi syarak,
-syarak bersendi Kitabullah.
-</p>
-</div>
-</section>
-
-<!-- AKAD & RESEPSI -->
-<section>
-<div class="card">
-<h2>Rangkaian Acara</h2>
-
+<h2>Galeri Bahagia</h2>
 <div class="grid">
-<div>
-<h3>Akad Nikah</h3>
-<p>
-Sabtu, 20 April 2026<br>
-Pukul 08.00 WIB<br>
-Kediaman Mempelai Wanita
-</p>
-</div>
-
-<div>
-<h3>Resepsi</h3>
-<p>
-Sabtu, 20 April 2026<br>
-Pukul 11.00 – 16.00 WIB<br>
-Gedung Balai Adat Melayu
-</p>
-</div>
-</div>
-
+<img src="foto/galeri1.jpg">
+<img src="foto/galeri2.jpg">
+<img src="foto/galeri3.jpg">
+<img src="foto/galeri4.jpg">
 </div>
 </section>
 
-<!-- LOKASI -->
+<!-- TRANSFER -->
 <section>
 <div class="card">
-<h2>Lokasi Acara</h2>
-<p>Gedung Balai Adat Melayu, Indragiri Hilir, Riau</p>
-<iframe 
-src="https://www.google.com/maps?q=Balai+Adat+Melayu+Indragiri+Hilir&output=embed"
-width="100%" height="320" style="border-radius:18px;border:0" loading="lazy">
-</iframe>
-</div>
-</section>
+<h2>Tanda Kasih</h2>
+<p>Doa restu Anda merupakan anugerah terindah bagi kami.</p>
 
-<!-- COUNTDOWN -->
-<section>
-<div class="card">
-<h2>Menuju Hari Bahagia</h2>
-<p id="countdown"></p>
-</div>
-</section>
+<img src="foto/qris.png" style="max-width:220px;border-radius:16px">
 
-<!-- PENUTUP -->
-<section>
-<p>
-Merupakan suatu kehormatan dan kebahagiaan bagi kami
-apabila Bapak/Ibu/Saudara/i berkenan hadir
-serta memberikan doa restu.
-</p>
-<p><i>Wassalamu’alaikum Warahmatullahi Wabarakatuh</i></p>
+<div class="rek" data-no="08XXXXXXXX">DANA – 08XXXXXXXX</div>
+<div class="rek" data-no="08XXXXXXXX">GoPay – 08XXXXXXXX</div>
+<div class="rek" data-no="1234567890">SeaBank – 1234567890</div>
+
+</div>
 </section>
 
 <script>
@@ -190,17 +155,9 @@ m.src="musik/lagu.mp3";
 m.play().catch(()=>{});
 }
 
-const target=new Date("2026-04-20T08:00:00").getTime();
-setInterval(()=>{
-const now=new Date().getTime();
-const d=target-now;
-if(d<0)return;
-const hari=Math.floor(d/(1000*60*60*24));
-const jam=Math.floor((d%(1000*60*60*24))/(1000*60*60));
-const menit=Math.floor((d%(1000*60*60))/(1000*60));
-document.getElementById("countdown").innerText=
-hari+" Hari • "+jam+" Jam • "+menit+" Menit";
-},1000);
+document.querySelectorAll('.rek').forEach(r=>{
+r.onclick=()=>navigator.clipboard.writeText(r.dataset.no);
+});
 </script>
 
 </body>
