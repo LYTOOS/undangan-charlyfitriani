@@ -28,10 +28,14 @@ z-index:9999; display:flex; align-items:center; justify-content:center; overflow
 .gate-text h1{font-size:48px;} .gate-text button{font-size:18px; padding:12px 28px; text-shadow:1px 1px 4px rgba(0,0,0,0.5);}
 
 .songket{
-background: linear-gradient(120deg, rgba(212,175,55,.15) 25%, rgba(255,215,0,.25) 50%, rgba(212,175,55,.15) 75%);
+background:
+radial-gradient(circle at 30% 30%, rgba(255,215,0,.18), transparent 40%),
+linear-gradient(120deg,
+rgba(212,175,55,.25) 25%,
+rgba(255,215,0,.35) 50%,
+rgba(212,175,55,.25) 75%);
 background-size:200% 200%;
-animation:songket 6s infinite linear;
-position:relative;
+animation:songket 8s infinite linear;
 }
 @keyframes songket{0%{background-position:0% 50%}100%{background-position:200% 50%}}
 .songket::before{
@@ -40,6 +44,16 @@ position:absolute;
 inset:0;
 background:url("https://www.transparenttextures.com/patterns/fabric-of-squares.png");
 opacity:.25;
+mix-blend-mode:overlay;
+pointer-events:none;
+}
+.songket::after{
+content:"";
+position:absolute;
+inset:0;
+background:
+url("https://www.transparenttextures.com/patterns/arabesque.png");
+opacity:.18;
 mix-blend-mode:overlay;
 pointer-events:none;
 }
@@ -57,13 +71,61 @@ background:linear-gradient(45deg,rgba(255,215,0,.08),transparent);
 pointer-events:none;
 }
 
+/* === PREMIUM DIVIDER EMAS HIDUP === */
 .section-divider{
-width:120px;
+width:140px;
 height:6px;
-margin:24px auto;
-background:linear-gradient(90deg,#c9a24d,#ffd700,#c9a24d);
-border-radius:6px;
-box-shadow:0 0 12px rgba(255,215,0,.6);
+margin:28px auto;
+border-radius:8px;
+background:
+linear-gradient(
+90deg,
+#8f6b1f,
+#ffd700,
+#fff3b0,
+#ffd700,
+#8f6b1f
+);
+box-shadow:
+0 0 18px rgba(255,215,0,.6),
+0 0 40px rgba(255,215,0,.35);
+position:relative;
+overflow:hidden;
+}
+  
+/* Kilau cahaya */
+.section-divider::after{
+content:"";
+position:absolute;
+top:0; left:-40%;
+width:40%;
+height:100%;
+background:linear-gradient(
+120deg,
+    transparent,
+    rgba(255,255,255,.9),
+    transparent
+  );
+  animation:shine 3s infinite;
+}
+
+@keyframes goldFlow{
+  0%{background-position:0%}
+  100%{background-position:300%}
+}
+
+@keyframes shine{
+0%{left:-40%}
+100%{left:140%}
+}
+
+h2{
+font-size:38px;
+letter-spacing:3px;
+text-transform:uppercase;
+text-shadow:
+0 3px 6px rgba(0,0,0,.35),
+0 0 18px rgba(255,215,0,.45);
 }
   
 .royal-title{
@@ -91,6 +153,62 @@ button{padding:14px 36px;border-radius:40px;border:none;background:linear-gradie
 #popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);align-items:center;justify-content:center}
 #popup img{max-width:300px;border-radius:20px}
 small{color:#888}
+  
+/* === ROYAL CINEMATIC EFFECT === */
+.royal-fade{
+  animation:royalFade 2.2s ease forwards;
+}
+@keyframes royalFade{
+  from{opacity:0; transform:scale(1.08)}
+  to{opacity:1; transform:scale(1)}
+}
+
+/* === RELIEF EMAS HIDUP === */
+.royal-title{
+  position:relative;
+}
+.royal-title::after{
+  content:attr(data-text);
+  position:absolute;
+  left:0; top:0;
+  background:linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(255,255,255,.8),
+    transparent 80%
+  );
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:goldSweep 4s infinite;
+}
+@keyframes goldSweep{
+  from{background-position:-200%}
+  to{background-position:200%}
+}
+
+/* === ORNAMEN MELAYU === */
+.ornament{
+  display:flex;
+  justify-content:center;
+  gap:24px;
+  margin-bottom:18px;
+}
+.ornament span{
+  width:80px;
+  height:3px;
+  background:linear-gradient(90deg,#8f6b1f,#ffd700,#8f6b1f);
+  box-shadow:0 0 12px rgba(255,215,0,.6);
+}
+
+/* === SONGKET FABRIC WAVE === */
+.songket{
+  background-attachment:fixed;
+  animation:fabricMove 10s infinite linear;
+}
+@keyframes fabricMove{
+  0%{background-position:0% 50%}
+  100%{background-position:200% 50%}
+}
 </style>
 </head>
 
@@ -100,15 +218,16 @@ small{color:#888}
   <div class="gate left"></div>
   <div class="gate right"></div>
   <div class="gate-text">
-    <h1 class="royal-title">Walimatul ‘Urs</h1>
+    <h1 class="royal-title" data-text="Walimatul ‘Urs">Walimatul ‘Urs</h1>
     <button onclick="openGate()">Buka Undangan</button>
   </div>
 </div>
 
 <audio id="musik" src="musik/lagu.mp3" loop></audio>
 
-<section class="hero">
+<section class="hero royal-fade">
 <div data-aos="zoom-in">
+  <div class="ornament"><span></span><span></span></div>
 <h1>Walimatul ‘Urs</h1>
 <p id="tamu">Tamu Undangan</p>
 <p>Minggu, 15 Februari 2026</p>
@@ -131,14 +250,14 @@ small{color:#888}
 
 <section data-aos="fade-up">
   <h2>Pantun Adat Melayu</h2>
-  <div class="section-divider"></div>
+  <div class="section-divider" data-aos="zoom-in"></div>
 
   <p id="pantun" style="font-style:italic;font-size:18px"></p>
 </section>
 
 <section data-aos="fade-up">
   <h2>Pengantin</h2>
-  <div class="section-divider"></div>
+  <div class="section-divider" data-aos="zoom-in"></div>
 
   <p><b>Nama Mempelai Pria:</b> Charly Handani</p>
   <p><b>Nama Mempelai Wanita:</b> Fitriani</p>
@@ -175,13 +294,15 @@ small{color:#888}
 
 <section data-aos="fade-up">
   <h2>Akad Nikah</h2>
-  <div class="section-divider"></div>
+  <div class="section-divider" data-aos="zoom-in"></div>
+
   <p>07.00 WIB<br>Kantor KUA Kec. Concong</p>
 </section>
 
 <section data-aos="fade-up">
   <h2>Resepsi</h2>
-  <div class="section-divider"></div>
+  <div class="section-divider" data-aos="zoom-in"></div>
+
   <p>11.00 – 17.00 WIB<br>Kediaman Mempelai Wanita</p>
 </section>
 
@@ -302,17 +423,35 @@ setInterval(()=>{
 
 // Parallax songket
 window.addEventListener("scroll",()=>{
-const sc = window.scrollY;
+  const sc = window.scrollY;
 
-const hero=document.querySelector(".hero");
-if(hero) hero.style.backgroundPositionY = sc*0.35+"px";
+  const hero = document.querySelector(".hero");
+  if(hero){
+    hero.style.backgroundPosition = `center ${sc*0.35}px`;
+  }
 
-const songket=document.querySelector(".songket");
-if(songket) songket.style.backgroundPosition = `center ${sc*0.6}px`;
+  const songket = document.querySelector(".songket");
+  if(songket){
+    songket.style.backgroundPosition = `center ${sc*0.6}px`;
+    songket.style.transform = `translateZ(0) scale(1.02)`;
+  }
 
-const layer=document.querySelector(".songket-layer");
-if(layer) layer.style.transform = `translateY(${sc*0.2}px)`;
+  const layer = document.querySelector(".songket-layer");
+  if(layer){
+    layer.style.transform = `translateY(${sc*0.25}px)`;
+  }
 });
+</script>
+
+<script>
+const slider=document.querySelector(".slider");
+let scrollPos=0;
+setInterval(()=>{
+  if(!slider) return;
+  scrollPos+=300;
+  if(scrollPos>=slider.scrollWidth) scrollPos=0;
+  slider.scrollTo({left:scrollPos,behavior:"smooth"});
+},3500);
 </script>
 
 </body>
