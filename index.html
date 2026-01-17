@@ -16,16 +16,13 @@ h1,h2{font-family:'Playfair Display',serif;color:#c9a24d}
 #gate{
 position:fixed;
 inset:0;
-background:
-linear-gradient(135deg,#1c1b18,#2b261f),
-url('foto/cover.jpg') center/cover;
+background:linear-gradient(135deg,#1c1b18,#2b261f),url('foto/cover.jpg') center/cover;
 z-index:9999;
 display:flex;
 align-items:center;
 justify-content:center;
 overflow:hidden;
 }
-
 .gate{
 position:absolute;
 top:0;
@@ -34,13 +31,10 @@ height:100%;
 background:linear-gradient(135deg,#d4af37,#b8962e);
 transition:1.2s ease-in-out;
 }
-
 .gate.left{left:0}
 .gate.right{right:0}
-
 #gate.open .left{transform:translateX(-100%)}
 #gate.open .right{transform:translateX(100%)}
-
 .gate-text{
 position:relative;
 z-index:2;
@@ -48,15 +42,10 @@ text-align:center;
 color:#fff;
 }
 .songket{
-background:
-linear-gradient(120deg,
-rgba(212,175,55,.15) 25%,
-rgba(255,215,0,.25) 50%,
-rgba(212,175,55,.15) 75%);
+background:linear-gradient(120deg,rgba(212,175,55,.15) 25%,rgba(255,215,0,.25) 50%,rgba(212,175,55,.15) 75%);
 background-size:200% 200%;
 animation:songket 6s infinite linear;
 }
-
 @keyframes songket{
 0%{background-position:0% 50%}
 100%{background-position:200% 50%}
@@ -71,17 +60,8 @@ filter:none;
 .card{background:#fff;max-width:900px;margin:40px auto;padding:50px;border-radius:26px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
 .grid img{width:100%;height:220px;object-fit:cover;border-radius:18px}
-.slider{
-display:flex;
-gap:16px;
-overflow-x:auto;
-scroll-snap-type:x mandatory;
-}
-.slider img{
-width:280px;
-border-radius:20px;
-scroll-snap-align:center;
-}
+.slider{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;}
+.slider img{width:280px;border-radius:20px;scroll-snap-align:center;}
 input,textarea{width:100%;padding:14px;border-radius:12px;border:1px solid #ddd;margin-bottom:14px}
 button{padding:14px 36px;border-radius:40px;border:none;background:linear-gradient(135deg,#d4af37,#b8962e);color:#fff;cursor:pointer}
 .ucapan{text-align:left;border-bottom:1px solid #eee;padding:12px 0}
@@ -95,6 +75,7 @@ small{color:#888}
 
 <body>
 
+<!-- Gate -->
 <div id="gate">
 <div class="gate left"></div>
 <div class="gate right"></div>
@@ -106,6 +87,7 @@ small{color:#888}
 
 <audio id="musik" src="musik/lagu.mp3" loop></audio>
 
+<!-- Hero -->
 <section class="hero">
 <div data-aos="zoom-in">
 <h1>Walimatul ‘Urs</h1>
@@ -114,6 +96,7 @@ small{color:#888}
 </div>
 </section>
 
+<!-- Adat Melayu -->
 <section class="songket" data-aos="fade-up">
 <h2>Adat Melayu Riau</h2>
 <p>
@@ -125,39 +108,66 @@ sebagai tanda restu keluarga dan adat.
 <p><i>“Takkan Melayu hilang di bumi.”</i></p>
 </section>
 
+<!-- Pantun -->
 <section data-aos="fade-up">
 <h2>Pantun Adat Melayu</h2>
 <p id="pantun" style="font-style:italic;font-size:18px"></p>
 </section>
 
+<!-- Mempelai -->
 <section data-aos="fade-up">
-<h2>Keluarga Besar</h2>
+<h2>Mempelai</h2>
 <p>
-Putra dari pasangan<br>
-<b>Bapak Zaili</b> & <b>Ibu Erni Wati</b>
-</p>
-<br>
-<p>
-Putri dari pasangan<br>
-<b>Bapak Raja Pian</b> & <b>Ibu Yati</b>
+<b>Pria:</b> Zaili Ramadhan<br>
+<b>Wanita:</b> Erni Wati
 </p>
 </section>
 
+<!-- Orang Tua -->
+<section data-aos="fade-up">
+<h2>Orang Tua</h2>
+<p>
+<b>Orang Tua Mempelai Pria:</b><br>
+Bapak Zaili & Ibu Erni Wati
+</p>
+<p>
+<b>Orang Tua Mempelai Wanita:</b><br>
+Bapak Raja Pian & Ibu Yati
+</p>
+</section>
+
+<!-- Keluarga Besar -->
+<section data-aos="fade-up">
+<h2>Keluarga Besar</h2>
+<p>
+<b>Keluarga Besar Mempelai Pria:</b><br>
+Bapak Amir, Ibu Siti, Pak Hadi, Bu Rina, Pak Anwar, Bu Lina
+</p>
+<p>
+<b>Keluarga Besar Mempelai Wanita:</b><br>
+Bapak Joko, Ibu Ratna, Pak Agus, Bu Maya, Pak Fajar, Bu Dewi
+</p>
+</section>
+
+<!-- Countdown -->
 <section data-aos="fade-up">
 <h2>Menuju Hari Bahagia</h2>
 <div id="countdown" style="font-size:28px;font-weight:600"></div>
 </section>
 
+<!-- Akad Nikah -->
 <section data-aos="fade-up">
 <h2>Akad Nikah</h2>
 <p>07.00 WIB<br>Kantor KUA Kec. Concong</p>
 </section>
 
+<!-- Resepsi -->
 <section data-aos="fade-up">
 <h2>Resepsi</h2>
 <p>11.00 – 17.00 WIB<br>Kediaman Mempelai Wanita</p>
 </section>
 
+<!-- Galeri -->
 <section data-aos="fade-up">
 <h2>Galeri</h2>
 <div class="slider">
@@ -168,6 +178,7 @@ Putri dari pasangan<br>
 </div>
 </section>
 
+<!-- Tanda Kasih -->
 <section data-aos="fade-up">
 <h2>Tanda Kasih</h2>
 <div class="card">
@@ -179,6 +190,7 @@ Putri dari pasangan<br>
 </div>
 </section>
 
+<!-- Ucapan & Doa -->
 <section data-aos="fade-up">
 <div class="card">
 <h2>Ucapan & Doa</h2>
@@ -193,6 +205,7 @@ Putri dari pasangan<br>
 <img src="foto/qris.png">
 </div>
 
+<!-- Scripts -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
@@ -209,85 +222,78 @@ projectId:"undangan-pernikahan-f6d5e"
 firebase.initializeApp(firebaseConfig);
 const db=firebase.database();
 
-// ======= PANTUN =======
+// Pantun otomatis
 const pantunList = [
 "Pergi ke hulu mencari sepat, singgah sebentar di tepi paya. Jika niat sudah terpatri di hati, akad nikah jadi penyempurna cinta.",
 "Songket disulam benang emas, dipakai raja di hari mulia. Restu orang tua doa terikhlas, rumah tangga bahagia selamanya.",
 "Kalau berlayar ke Indragiri, jangan lupa membawa bekal. Bila akad telah diikrari, cinta halal jadi modal kekal."
 ];
-document.getElementById("pantun").innerText =
-pantunList[Math.floor(Math.random()*pantunList.length)];
+document.getElementById("pantun").innerText = pantunList[Math.floor(Math.random()*pantunList.length)];
 
-// ======= WA & DEVICE =======
+// Ucapan WA
 const WA_NUMBER="6282261467360";
 const WA_APIKEY="APIKEY_KAMU";
+
 const device = localStorage.device || ("dev-"+Math.random().toString(36).substr(2,9));
 localStorage.device = device;
 
-// ======= DEFINISI listUcapan =======
-const listUcapan = document.getElementById("listUcapan");
-
-// ======= FUNGSIONALITAS =======
 function play(){document.getElementById("musik").play()}
 function popup(show){document.getElementById("popup").style.display = show ? "flex" : "none";}
-function copy(t){navigator.clipboard.writeText(t);alert("Disalin")}
+function copy(t){navigator.clipboard.writeText(t);alert("Disalin");}
 
 function kirim(){
-  if(localStorage.ucapanTerkirim) return alert("Ucapan sudah terkirim 🙏");
-  const n=nama.value.trim(), p=pesan.value.trim();
-  if(n.length<3||p.length<5) return alert("Lengkapi");
-  const data={nama:n,pesan:p,waktu:Date.now(),device};
-  db.ref("ucapan").push(data);
-  localStorage.ucapanTerkirim=true;
-  fetch(`https://api.callmebot.com/whatsapp.php?phone=${WA_NUMBER}&text=Ucapan%20Baru%20${n}%20:%20${p}&apikey=${WA_APIKEY}`);
-  pesan.value="";
+if(localStorage.ucapanTerkirim) return alert("Ucapan sudah terkirim 🙏");
+const n=nama.value.trim(), p=pesan.value.trim();
+if(n.length<3||p.length<5) return alert("Lengkapi");
+const data={nama:n,pesan:p,waktu:Date.now(),device};
+db.ref("ucapan").push(data);
+localStorage.ucapanTerkirim=true;
+fetch(`https://api.callmebot.com/whatsapp.php?phone=${WA_NUMBER}&text=Ucapan%20Baru%20${n}%20:%20${p}&apikey=${WA_APIKEY}`);
+pesan.value="";
 }
 
-// ======= LIST UCAPAN REALTIME =======
+// Tampilkan ucapan
 db.ref("ucapan").on("child_added",s=>{
-  const d=s.val();
-  listUcapan.prepend(Object.assign(document.createElement("div"),{
-    className:"ucapan",
-    innerHTML:`<b>${d.nama}</b><br>${d.pesan}<br><small>${new Date(d.waktu).toLocaleString()}</small>`
-  }));
+const d=s.val();
+listUcapan.prepend(Object.assign(document.createElement("div"),{
+className:"ucapan",
+innerHTML:`<b>${d.nama}</b><br>${d.pesan}<br><small>${new Date(d.waktu).toLocaleString()}</small>`
+}));
 });
 
-// ======= PARAMETER TAMU =======
+// Nama tamu
 const params=new URLSearchParams(location.search);
 if(params.get("to")) document.getElementById("tamu").innerText="Yth. "+params.get("to");
 
-// ======= ADMIN MODE =======
+// Admin mode
 const isAdmin = location.hash === "#admin-rahasia-2026";
-if(isAdmin){
-  document.body.style.outline="5px dashed gold";
-  console.log("ADMIN MODE AKTIF");
-}
+if(isAdmin){document.body.style.outline="5px dashed gold"; console.log("ADMIN MODE AKTIF");}
 
-// ======= OPEN GATE =======
+// Buka gate
 function openGate(){
-  document.getElementById("gate").classList.add("open");
-  document.getElementById("musik").play();
-  setTimeout(()=>{document.getElementById("gate").remove();},1300);
+document.getElementById("gate").classList.add("open");
+document.getElementById("musik").play();
+setTimeout(()=>{document.getElementById("gate").remove();},1300);
 }
 
-// ======= COUNTDOWN =======
+// Countdown
 const target = new Date("2026-02-15T07:00:00").getTime();
 setInterval(()=>{
-  const now = Date.now();
-  const d = target - now;
-  if(d < 0){ countdown.innerHTML = "Hari Ini"; return; }
-  const days = Math.floor(d / 86400000);
-  const h = Math.floor(d % 86400000 / 3600000);
-  const m = Math.floor(d % 3600000 / 60000);
-  const s = Math.floor(d % 60000 / 1000);
-  countdown.innerHTML = `${days} hari ${h} jam ${m} menit ${s} detik`;
+const now = Date.now();
+const d = target - now;
+if(d<0){countdown.innerHTML="Hari Ini"; return;}
+const days = Math.floor(d/86400000);
+const h = Math.floor(d%86400000/3600000);
+const m = Math.floor(d%3600000/60000);
+const s = Math.floor(d%60000/1000);
+countdown.innerHTML=`${days} hari ${h} jam ${m} menit ${s} detik`;
 },1000);
 
-// ======= PARALLAX HERO =======
+// Parallax
 window.addEventListener("scroll",()=>{
-  const sc=window.pageYOffset;
-  const hero = document.querySelector(".hero");
-  if(hero) hero.style.backgroundPositionY = sc*0.4 + "px";
+const sc=window.pageYOffset;
+const hero=document.querySelector(".hero");
+if(hero){hero.style.backgroundPositionY = sc*0.4 + "px";}
 });
 </script>
 
