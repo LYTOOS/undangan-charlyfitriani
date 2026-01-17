@@ -34,7 +34,48 @@ animation:songket 6s infinite linear;
 position:relative;
 }
 @keyframes songket{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+.songket::before{
+content:"";
+position:absolute;
+inset:0;
+background:url("https://www.transparenttextures.com/patterns/fabric-of-squares.png");
+opacity:.25;
+mix-blend-mode:overlay;
+pointer-events:none;
+}
 
+.songket{
+position:relative;
+box-shadow:
+inset 0 30px 60px rgba(255,215,0,.15),
+inset 0 -30px 60px rgba(0,0,0,.25);
+}
+.songket-layer{
+position:absolute;
+inset:0;
+background:linear-gradient(45deg,rgba(255,215,0,.08),transparent);
+pointer-events:none;
+}
+
+.section-divider{
+width:120px;
+height:6px;
+margin:24px auto;
+background:linear-gradient(90deg,#c9a24d,#ffd700,#c9a24d);
+border-radius:6px;
+box-shadow:0 0 12px rgba(255,215,0,.6);
+}
+  
+.royal-title{
+font-size:52px;
+letter-spacing:4px;
+background:linear-gradient(135deg,#FFD700,#FFF2B0,#C9A24D);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:
+0 2px 8px rgba(0,0,0,.4),
+0 0 20px rgba(255,215,0,.35);
+}
 .qris-protect{filter:blur(12px);transition:.3s;}
 .qris-protect:hover{filter:none;}
 .card{background:#fff;max-width:900px;margin:40px auto;padding:50px;border-radius:26px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
@@ -59,7 +100,7 @@ small{color:#888}
   <div class="gate left"></div>
   <div class="gate right"></div>
   <div class="gate-text">
-    <h1>Walimatul ‘Urs</h1>
+    <h1 class="royal-title">Walimatul ‘Urs</h1>
     <button onclick="openGate()">Buka Undangan</button>
   </div>
 </div>
@@ -75,44 +116,56 @@ small{color:#888}
 </section>
 
 <section class="songket" data-aos="fade-up">
-<h2>Adat Melayu Riau</h2>
-<p>
-Dengan memohon ridho Allah SWT,<br>
-kami melaksanakan pernikahan sesuai adat Melayu Riau,<br>
-didahului dengan tepuk tepung tawar sebagai tanda restu keluarga dan adat.
-</p>
-<p><i>“Takkan Melayu hilang di bumi.”</i></p>
+  <div class="songket-layer"></div>
+
+  <h2>Adat Melayu Riau</h2>
+  <div class="section-divider"></div>
+
+  <p>
+    Dengan memohon ridho Allah SWT,<br>
+    kami melaksanakan pernikahan sesuai adat Melayu Riau,<br>
+    didahului dengan tepuk tepung tawar sebagai tanda restu keluarga dan adat.
+  </p>
+  <p><i>“Takkan Melayu hilang di bumi.”</i></p>
 </section>
 
 <section data-aos="fade-up">
-<h2>Pantun Adat Melayu</h2>
-<p id="pantun" style="font-style:italic;font-size:18px"></p>
+  <h2>Pantun Adat Melayu</h2>
+  <div class="section-divider"></div>
+
+  <p id="pantun" style="font-style:italic;font-size:18px"></p>
 </section>
 
 <section data-aos="fade-up">
-<h2>Pengantin</h2>
-<p><b>Nama Mempelai Pria:</b> Charly Handani</p>
-<p><b>Nama Mempelai Wanita:</b> Fitriani</p>
+  <h2>Pengantin</h2>
+  <div class="section-divider"></div>
+
+  <p><b>Nama Mempelai Pria:</b> Charly Handani</p>
+  <p><b>Nama Mempelai Wanita:</b> Fitriani</p>
 </section>
 
 <section data-aos="fade-up">
-<h2>Orang Tua Pihak Pria</h2>
-<p>Bapak Zaili & Ibu Erni Wati</p>
+  <h2>Orang Tua Pihak Pria</h2>
+  <div class="section-divider"></div>
+  <p>Bapak Zaili & Ibu Erni Wati</p>
 </section>
 
 <section data-aos="fade-up">
-<h2>Orang Tua Pihak Wanita</h2>
-<p>Bapak R. Supian & Ibu Suryati</p>
+  <h2>Orang Tua Pihak Wanita</h2>
+  <div class="section-divider"></div>
+  <p>Bapak R. Supian & Ibu Suryati</p>
 </section>
 
 <section data-aos="fade-up">
-<h2>Keluarga Besar Pihak Pria</h2>
-<p>Kakak Ahmad, Adik Fajar, Sepupu Rina, Paman Budi, Bibi Sari</p>
+  <h2>Keluarga Besar Pihak Pria</h2>
+  <div class="section-divider"></div>
+  <p>Kakak Ahmad, Adik Fajar, Sepupu Rina, Paman Budi, Bibi Sari</p>
 </section>
 
 <section data-aos="fade-up">
-<h2>Keluarga Besar Pihak Wanita</h2>
-<p>Kakak Rina, Adik Sari, Sepupu Dani, Paman Hadi, Bibi Lela</p>
+  <h2>Keluarga Besar Pihak Wanita</h2>
+  <div class="section-divider"></div>
+  <p>Kakak Rina, Adik Sari, Sepupu Dani, Paman Hadi, Bibi Lela</p>
 </section>
 
 <section data-aos="fade-up">
@@ -121,13 +174,15 @@ didahului dengan tepuk tepung tawar sebagai tanda restu keluarga dan adat.
 </section>
 
 <section data-aos="fade-up">
-<h2>Akad Nikah</h2>
-<p>07.00 WIB<br>Kantor KUA Kec. Concong</p>
+  <h2>Akad Nikah</h2>
+  <div class="section-divider"></div>
+  <p>07.00 WIB<br>Kantor KUA Kec. Concong</p>
 </section>
 
 <section data-aos="fade-up">
-<h2>Resepsi</h2>
-<p>11.00 – 17.00 WIB<br>Kediaman Mempelai Wanita</p>
+  <h2>Resepsi</h2>
+  <div class="section-divider"></div>
+  <p>11.00 – 17.00 WIB<br>Kediaman Mempelai Wanita</p>
 </section>
 
 <section data-aos="fade-up">
@@ -247,11 +302,16 @@ setInterval(()=>{
 
 // Parallax songket
 window.addEventListener("scroll",()=>{
-  const sc=window.pageYOffset;
-  const hero=document.querySelector(".hero");
-  if(hero){hero.style.backgroundPositionY = sc*0.4 + "px";}
-  const songket=document.querySelector(".songket");
-  if(songket){songket.style.backgroundPositionY = sc*0.6 + "px";}
+const sc = window.scrollY;
+
+const hero=document.querySelector(".hero");
+if(hero) hero.style.backgroundPositionY = sc*0.35+"px";
+
+const songket=document.querySelector(".songket");
+if(songket) songket.style.backgroundPosition = `center ${sc*0.6}px`;
+
+const layer=document.querySelector(".songket-layer");
+if(layer) layer.style.transform = `translateY(${sc*0.2}px)`;
 });
 </script>
 
