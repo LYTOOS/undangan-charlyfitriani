@@ -25,18 +25,71 @@ button:active{
   transform:scale(.96);
 }
 
+.icon-circle{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  background:#fff;
+  padding:4px; /* ← kecilkan di sini */
+  box-shadow:0 6px 16px rgba(0,0,0,.15);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.icon-circle img{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+}
+
 #gate{
 position:fixed; inset:0;
 background: linear-gradient(135deg,#1c1b18,#2b261f), url('foto/cover.jpg') center/cover;
 z-index:9999; display:flex; align-items:center; justify-content:center; overflow:hidden;
 }
 
-.gate{position:absolute;top:0;width:50%;height:100%;background:linear-gradient(135deg,#d4af37,#b8962e);transition:1.2s ease-in-out}
+#gate::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.25);
+  z-index:2;
+}
+
+.gate{position:absolute;top:0;width:50%;height:100%;background:linear-gradient(135deg,#d4af37,#b8962e);transition:1.2s ease-in-out;z-index:1}
 .gate.left{left:0} .gate.right{right:0}
 #gate.open .left{transform:translateX(-100%)} #gate.open .right{transform:translateX(100%)}
 
-.gate-text{position:relative; z-index:2; text-align:center; color:#FFD700; text-shadow:2px 2px 8px rgba(0,0,0,0.6);}
+.gate-text{position:relative; z-index:5; text-align:center; color:#FFD700; text-shadow:2px 2px 8px rgba(0,0,0,0.6);}
 .gate-text h1{font-size:48px;} .gate-text button{font-size:18px; padding:12px 28px; text-shadow:1px 1px 4px rgba(0,0,0,0.5);}
+
+#musicControl{
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#d4af37,#b8962e);
+  color:#fff;
+  font-size:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(212,175,55,.55);
+  z-index:99999;
+  transition:.35s ease;
+}
+
+#musicControl:hover{
+  transform:scale(1.08);
+}
+
+#musicControl.muted{
+  background:#666;
+}
 
 .songket{
 background:
@@ -534,6 +587,9 @@ textarea{
 </div>
 
 <audio id="musik" src="musik/lagu.mp3" loop></audio>
+<div id="musicControl" onclick="toggleMusic()">
+  🔊
+</div>
 <script>
 const musik = document.getElementById("musik");
 </script>
@@ -684,16 +740,26 @@ dan Dia menjadikan di antaramu rasa kasih dan sayang.”
 </section>
 
 <section data-aos="fade-up">
-<div class="card">
-<h2 style="margin-bottom:12px;">Ucapan & Doa</h2>
-<p style="font-size:14px;color:#777;margin-bottom:26px">
-  Kehadiran dan doa kamu sangat berarti bagi kami 🤍
-</p>
-<input id="nama" placeholder="Nama">
-<textarea id="pesan" placeholder="Tulis ucapan"></textarea>
-<button onclick="kirim()">Kirim</button>
-<div id="listUcapan"></div>
-</div>
+  <div class="card">
+    <h2 style="margin-bottom:12px;">Ucapan & Doa</h2>
+
+    <p style="font-size:14px;color:#777;margin-bottom:22px">
+      Kehadiran dan doa kamu sangat berarti bagi kami 🤍
+    </p>
+
+    <a href="https://wa.me/6282261467360?text=Assalamu’alaikum%20kami%20sudah%20mengisi%20ucapan%20di%20undangan%20%F0%9F%92%8D"
+       target="_blank"
+       class="maps-btn">
+      💬 Chat Keluarga Pengantin
+    </a>
+
+    <input id="nama" placeholder="Nama">
+    <textarea id="pesan" placeholder="Tulis ucapan"></textarea>
+
+    <button onclick="kirim()">Kirim</button>
+
+    <div id="listUcapan"></div>
+  </div>
 </section>
 
 <div id="popup" onclick="popup(false)">
@@ -740,6 +806,9 @@ const n=nama.value.trim(), p=pesan.value.trim();
 if(n.length<3||p.length<5) return alert("Lengkapi");
 
 db.ref("ucapan").push({nama:n,pesan:p,waktu:Date.now(),device});
+setTimeout(()=>{
+  alert("Ucapan Anda sangat berarti bagi kami 🤍");
+},600);
 localStorage.ucapanTerkirim=true;
 fetch(`https://api.callmebot.com/whatsapp.php?phone=${6282261467360}&text=Ucapan%20Baru%20dari%20${n}&apikey=${WA_APIKEY}`);
 pesan.value="";
@@ -877,22 +946,20 @@ document.addEventListener("keyup",e=>{
 </script>
 
 <script>
-let lastY = 0;
+let ticking = false;
+  
 window.addEventListener("scroll", () => {
-  const y = window.scrollY;
-  const delta = Math.abs(y - lastY);
-  lastY = y;
-
-  const intensity = Math.min(1, delta / 30);
-
-  document.documentElement.style.setProperty(
-    "--goldGlow",
-    `0 0 ${20 + intensity*40}px rgba(255,215,0,${0.15 + intensity*0.35})`
-  );
-
-  document.querySelectorAll(".section-divider").forEach(el=>{
-    el.style.transform = `scaleX(${1 + intensity*0.03})`;
-  });
+  if(!ticking){
+    window.requestAnimationFrame(()=>{
+      document.querySelectorAll("section").forEach(sec=>{
+        const rect = sec.getBoundingClientRect();
+        const offset = rect.top * 0.03;
+        sec.style.transform = `translateY(${offset}px)`;
+      });
+      ticking = false;
+    });
+    ticking = true;
+  }
 });
 </script>
 
@@ -941,6 +1008,22 @@ color:#888;
 
 </div>
 </footer>
+
+<script>
+const musicBtn = document.getElementById("musicControl");
+
+function toggleMusic(){
+  if(musik.paused){
+    musik.play();
+    musicBtn.innerHTML = "🔊";
+    musicBtn.classList.remove("muted");
+  }else{
+    musik.pause();
+    musicBtn.innerHTML = "🔇";
+    musicBtn.classList.add("muted");
+  }
+}
+</script>
 
 </body>
 </html>
