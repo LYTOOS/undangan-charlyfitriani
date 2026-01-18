@@ -777,12 +777,6 @@ dan Dia menjadikan di antaramu rasa kasih dan sayang.”
       Kehadiran dan doa kamu sangat berarti bagi kami 🤍
     </p>
 
-    <a href="https://wa.me/6282261467360?text=Assalamu’alaikum%20kami%20sudah%20mengisi%20ucapan%20di%20undangan%20%F0%9F%92%8D"
-       target="_blank"
-       class="maps-btn">
-      💬 Chat Keluarga Pengantin
-    </a>
-
     <input id="nama" placeholder="Nama">
     <textarea id="pesan" placeholder="Tulis ucapan & doa"></textarea>
 
@@ -836,9 +830,6 @@ const n=nama.value.trim(), p=pesan.value.trim();
 if(n.length<3||p.length<5) return alert("Lengkapi");
 
 db.ref("ucapan").push({nama:n,pesan:p,waktu:Date.now(),device});
-setTimeout(()=>{
-  alert("Ucapan Anda sangat berarti bagi kami 🤍");
-},600);
 localStorage.ucapanTerkirim=true;
 fetch(`https://api.callmebot.com/whatsapp.php?phone=${6282261467360}&text=Ucapan%20Baru%20dari%20${n}&apikey=${WA_APIKEY}`);
 pesan.value="";
