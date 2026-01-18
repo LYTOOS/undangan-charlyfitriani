@@ -25,6 +25,21 @@ button:active{
   transform:scale(.96);
 }
 
+#audioToggle{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  border:none;
+  background:linear-gradient(135deg,#d4af37,#b8962e);
+  color:#fff;
+  font-size:18px;
+  box-shadow:0 10px 26px rgba(0,0,0,.25);
+  z-index:999;
+}
+
 .icon-circle{
   width:54px;
   height:54px;
@@ -35,6 +50,11 @@ button:active{
   display:flex;
   align-items:center;
   justify-content:center;
+}
+
+img{
+  position:relative;
+  z-index:1;
 }
 
 .icon-circle img{
@@ -98,16 +118,6 @@ z-index:9999; display:flex; align-items:center; justify-content:center; overflow
   background:#666;
 }
 
-.songket{
-background:
-radial-gradient(circle at 30% 30%, rgba(255,215,0,.18), transparent 40%),
-linear-gradient(120deg,
-rgba(212,175,55,.25) 25%,
-rgba(255,215,0,.35) 50%,
-rgba(212,175,55,.25) 75%);
-background-size:200% 200%;
-animation:songket 8s infinite linear;
-}
 .songket::before{
 content:"";
 position:absolute;
@@ -126,10 +136,12 @@ pointer-events:none;
 }
 
 .songket{
-position:relative;
-box-shadow:
-inset 0 30px 60px rgba(255,215,0,.15),
-inset 0 -30px 60px rgba(0,0,0,.25);
+  position:absolute;
+  background:
+    url("foto/songket.png") center/cover no-repeat;
+  opacity:.16;
+  z-index:-1;
+  transform:translateZ(0);
 }
 .songket-layer{
 position:absolute;
@@ -235,31 +247,12 @@ text-shadow:
 0 0 18px rgba(255,215,0,.45);
 }
 
-/* === LEVEL 7 : SCROLL ROYAL ORNAMENT === */
-.royal-scroll{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:99995;
+html{
+  scroll-behavior:smooth;
 }
 
-.royal-scroll::before{
-  content:"";
-  position:absolute;
-  top:-30%;
-  left:-20%;
-  width:140%;
-  height:160%;
-  background:
-    radial-gradient(circle at top,
-      rgba(255,215,0,.22),
-      transparent 60%);
-  animation:royalSweep 12s linear infinite;
-}
-
-@keyframes royalSweep{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(360deg)}
+section{
+  scroll-margin-top:60px;
 }
   
 .royal-title{
@@ -309,6 +302,13 @@ text-shadow:
 }
   
 .card{background:#fff;max-width:900px;margin:40px auto;padding:50px;border-radius:26px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.card h2{
+  margin-bottom:8px;
+}
+
+.card p{
+  margin-top:0;
+}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
 .grid img{width:100%;height:220px;object-fit:cover;border-radius:18px}
 .slider{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;}
@@ -317,7 +317,6 @@ input,textarea{width:100%;padding:14px;border-radius:12px;border:1px solid #ddd;
 button{padding:14px 36px;border-radius:40px;border:none;background:linear-gradient(135deg,#d4af37,#b8962e);color:#fff;cursor:pointer}
 .ucapan{text-align:left;border-bottom:1px solid #eee;padding:12px 0}
 .copy{cursor:pointer;color:#c9a24d;font-weight:600}
-.qris{max-width:220px;cursor:pointer}
 #popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);align-items:center;justify-content:center}
 #popup img{max-width:300px;border-radius:20px}
 small{color:#888}
@@ -330,6 +329,19 @@ section{
 section.show{
   opacity:1;
   transform:translateY(0) scale(1);
+}
+
+section{
+  transition:transform .8s ease, opacity .8s ease;
+}
+
+section[data-aos]{
+  opacity:0;
+}
+
+section.aos-animate{
+  opacity:1;
+  transform:none;
 }
 
 .sosmed{
@@ -421,16 +433,6 @@ section.show{
   pointer-events:none;
   transform:translateZ(0);
 }
-
-/* === SONGKET FABRIC WAVE === */
-.songket{
-  background-attachment:fixed;
-  animation:fabricMove 10s infinite linear;
-}
-@keyframes fabricMove{
-  0%{background-position:0% 50%}
-  100%{background-position:200% 50%}
-}
   
 /* ===== LEVEL 4 : CINEMATIC ===== */
 #cinematic{
@@ -448,9 +450,6 @@ section.show{
 @keyframes cinematicOut{
   to{opacity:0; visibility:hidden}
 }
-setTimeout(()=>{
-  document.getElementById("cinematic").remove();
-}, 6000);
 .cinematic-title h1{
   font-size:4rem;
   color:gold;
@@ -652,7 +651,7 @@ textarea{
 
 <div class="royal-scroll"></div>
 <div class="royal-frame"></div>
-<div class="songket-curtain"></div>
+<div class="songket"></div>
 
 <div id="gate">
   <div class="gate left"></div>
@@ -679,12 +678,13 @@ textarea{
 </div>
 
 <audio id="musik" src="musik/lagu.mp3" loop></audio>
+
+<script>
+  const musik = document.getElementById("musik");
+</script>
 <div id="musicControl" onclick="toggleMusic()">
   🔊
 </div>
-<script>
-const musik = document.getElementById("musik");
-</script>
 
 <section class="hero royal-fade">
 <div data-aos="zoom-in">
@@ -887,22 +887,51 @@ function copy(t){navigator.clipboard.writeText(t);alert("Disalin")}
 
 // Kirim ucapan dengan limit 1 per device
 function kirim(){
-if(localStorage.ucapanTerkirim) return alert("Ucapan sudah terkirim 🙏");
-const n=nama.value.trim(), p=pesan.value.trim();
-if(n.length<3||p.length<5) return alert("Lengkapi");
+  if(localStorage.ucapanTerkirim){
+    alert("Ucapan sudah terkirim 🙏");
+    return;
+  }
 
-db.ref("ucapan").push({nama:n,pesan:p,waktu:Date.now(),device});
-localStorage.ucapanTerkirim=true;
-fetch(`https://api.callmebot.com/whatsapp.php?phone=${6282261467360}&text=Ucapan%20Baru%20dari%20${n}&apikey=${WA_APIKEY}`);
-pesan.value="";
+  const n = nama.value.trim();
+  const p = pesan.value.trim();
+
+  if(n.length < 3 || p.length < 5){
+    alert("Nama & ucapan belum lengkap");
+    return;
+  }
+
+  const now = Date.now();
+
+  const last = localStorage.lastSend || 0;
+  if(Date.now() - last < 60000){
+    alert("Tunggu 1 menit sebelum mengirim lagi 🙏");
+    return;
+  }
+  localStorage.lastSend = Date.now();
+
+  db.ref("ucapan").push({
+    nama: n,
+    pesan: p,
+    waktu: now,
+    device: device
+  });
+
+  localStorage.ucapanTerkirim = "1";
+
+  // WhatsApp notif
+  fetch(
+    `https://api.callmebot.com/whatsapp.php?phone=${WA_NUMBER}&text=Ucapan%20baru%20dari%20${encodeURIComponent(n)}&apikey=${WA_APIKEY}`
+  );
+
+  pesan.value = "";
 }
 
-db.ref("ucapan").on("child_added",s=>{
-const d=s.val();
-listUcapan.prepend(Object.assign(document.createElement("div"),{
-className:"ucapan",
-innerHTML:`<b>${d.nama}</b><br>${d.pesan}<br><small>${new Date(d.waktu).toLocaleString()}</small>`
-}));
+db.ref("ucapan").on("child_added", s => {
+  const d = s.val();
+  const div = document.createElement("div");
+  div.className = "ucapan";
+  div.innerText = `${d.nama}\n${d.pesan}`;
+  listUcapan.prepend(div);
 });
 
 const urlParams = new URLSearchParams(location.search);
@@ -968,20 +997,6 @@ window.addEventListener("scroll",()=>{
 </script>
 
 <script>
-const sections = document.querySelectorAll("section");
-
-const io = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add("show");
-    }
-  });
-},{threshold:.2});
-
-sections.forEach(sec=>io.observe(sec));
-</script>
-
-<script>
 const slider=document.querySelector(".slider");
 let scrollPos=0;
 setInterval(()=>{
@@ -994,17 +1009,21 @@ setInterval(()=>{
 
 <!-- MUSIC FADE IN (LEVEL 4 IMPERIAL) -->
 <script>
-musik.volume = 0;
-let v = 0;
+document.addEventListener("DOMContentLoaded",()=>{
+  const musik = document.getElementById("musik");
+  if(!musik) return;
 
-const fadeAudio = setInterval(()=>{
-  if(v < 0.6){
-    v += 0.02;
-    musik.volume = v;
-  }else{
-    clearInterval(fadeAudio);
-  }
-}, 200);
+  musik.volume = 0;
+  let v = 0;
+  const fadeAudio = setInterval(()=>{
+    if(v < 0.6){
+      v += 0.02;
+      musik.volume = v;
+    }else{
+      clearInterval(fadeAudio);
+    }
+  },200);
+});
 </script>
 
 <script>
@@ -1077,6 +1096,13 @@ function toggleMusic(){
     musicBtn.classList.add("muted");
   }
 }
+</script>
+
+<script>
+setTimeout(()=>{
+  const cine = document.getElementById("cinematic");
+  if(cine) cine.remove();
+},6000);
 </script>
 
 </body>
