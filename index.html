@@ -84,6 +84,16 @@ img{
   }
 }
 
+.watermark-agency{
+  margin-top:20px;
+  font-size:10px;
+  letter-spacing:2px;
+  color:rgba(0,0,0,.35);
+  text-align:center;
+  line-height:1.6;
+  user-select:none;
+}
+
 .profile img{
   position:relative;
   z-index:2;
@@ -702,7 +712,6 @@ textarea{
 
 /* === AGENCY WATERMARK HALUS FINAL === */
 body::before{
-  content:"INVITATION BY LYTOOS\n© 2026";
   position:fixed;
   bottom:12px;
   left:50%;
@@ -1152,6 +1161,10 @@ color:#888;
     <img src="icon/wa.png">
   </a>
 </div>
+
+<p class="watermark-agency">
+  INVITATION BY CHARLY STUDIO<br>© 2026
+</p>
 </footer>
 
 <script>
