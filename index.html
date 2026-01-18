@@ -583,6 +583,36 @@ section::before{
 textarea{
   resize:none;
 }
+
+/* SOCIAL MEDIA ICON - FINAL CLEAN */
+.social-wrap{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-top:18px;
+}
+
+.social-wrap a{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 6px 18px rgba(0,0,0,.15);
+  transition:.3s ease;
+}
+
+.social-wrap img{
+  width:18px;
+  height:18px;
+  border-radius:50%;
+}
+
+.social-wrap a:hover{
+  transform:translateY(-4px) scale(1.05);
+}
 </style>
 </head>
 
@@ -985,28 +1015,19 @@ color:#888;
      margin-bottom:18px;
      ">
 
-<div style="display:flex;justify-content:center;gap:14px">
-
-<a href="https://instagram.com/icharlyh"
-   target="_blank">
-<img src="icon/ig.png" class="sosmed">
-</a>
-
-<a href="https://tiktok.com/@icharlyh"
-   target="_blank">
-<img src="icon/tiktok.png" class="sosmed">
-</a>
-
-<a href="https://youtube.com/@lytoos7"
-   target="_blank">
-<img src="icon/youtube.png" class="sosmed">
-</a>
-
-<a href="https://wa.me/6282261467360"
-   target="_blank">
-<img src="icon/wa.png" class="sosmed">
-</a>
-
+<div class="social-wrap">
+  <a href="https://instagram.com/icharlyh" target="_blank">
+    <img src="icon/ig.png">
+  </a>
+  <a href="https://tiktok.com/@icharlyh" target="_blank">
+    <img src="icon/tiktok.png">
+  </a>
+  <a href="https://youtube.com/@lytoos7" target="_blank">
+    <img src="icon/youtube.png">
+  </a>
+  <a href="https://wa.me/6282261467360" target="_blank">
+    <img src="icon/wa.png">
+  </a>
 </div>
 </footer>
 
