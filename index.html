@@ -14,6 +14,7 @@ body{margin:0;font-family:Poppins;background:#fffaf2;color:#2b261f}
 section{padding:90px 20px;text-align:center}
 h1,h2{font-family:'Playfair Display',serif;color:#c9a24d}
 .hero{min-height:100vh;background:url('foto/cover.jpg') center/cover fixed;display:flex;align-items:center;justify-content:center;color:#fff}
+.songket-section{ position:relative; }
 button{
   transition:.35s cubic-bezier(.25,.8,.25,1);
 }
@@ -73,7 +74,7 @@ img{
 #gate{
 position:fixed; inset:0;
 background: linear-gradient(135deg,#1c1b18,#2b261f), url('foto/cover.jpg') center/cover;
-z-index:9999; display:flex; align-items:center; justify-content:center; overflow:hidden;
+z-index:10000; display:flex; align-items:center; justify-content:center; overflow:hidden;
 }
 
 #gate::after{
@@ -291,15 +292,11 @@ text-shadow:
   text-shadow:0 0 12px gold;
 }
 
-.qris-protect:active{
-  filter:blur(0) brightness(1);
+.qris-protect.open{
+  filter:blur(0);
   transform:scale(1.15);
-  z-index:10;
 }
-
-.qris-protect:active::after{
-  opacity:0;
-}
+.qris-protect.open::after{ opacity:0; }
   
 .card{background:#fff;max-width:900px;margin:40px auto;padding:50px;border-radius:26px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
 .card h2{
@@ -322,21 +319,7 @@ button{padding:14px 36px;border-radius:40px;border:none;background:linear-gradie
 small{color:#888}
 
 section{
-  opacity:0;
-  transform:translateY(40px) scale(.98);
-  transition:1s cubic-bezier(.22,1,.36,1);
-}
-section.show{
-  opacity:1;
-  transform:translateY(0) scale(1);
-}
-
-section{
   transition:transform .8s ease, opacity .8s ease;
-}
-
-section[data-aos]{
-  opacity:0;
 }
 
 section.aos-animate{
@@ -439,7 +422,7 @@ section.aos-animate{
   position:fixed;
   inset:0;
   background:#000;
-  z-index:9999;
+  z-index:9998;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -651,7 +634,7 @@ textarea{
 
 <div class="royal-scroll"></div>
 <div class="royal-frame"></div>
-<div class="songket"></div>
+<div class="songket-bg"></div>
 
 <div id="gate">
   <div class="gate left"></div>
@@ -678,13 +661,13 @@ textarea{
 </div>
 
 <audio id="musik" src="musik/lagu.mp3" loop></audio>
-
-<script>
-  const musik = document.getElementById("musik");
-</script>
 <div id="musicControl" onclick="toggleMusic()">
   🔊
 </div>
+
+<script>
+const musik = document.getElementById("musik");
+</script>
 
 <section class="hero royal-fade">
 <div data-aos="zoom-in">
@@ -695,7 +678,7 @@ textarea{
 </div>
 </section>
 
-<section class="songket" data-aos="fade-up">
+<section class="songket-section" data-aos="fade-up">
   <div class="songket-layer"></div>
 
   <h2>Adat Melayu Riau</h2>
@@ -978,21 +961,20 @@ setInterval(()=>{
   const s = Math.floor(d % 60000 / 1000);
   countdown.innerHTML=`${days} hari ${h} jam ${m} menit ${s} detik`;
 },1000);
-
-// Parallax songket
+  
+<script>
+let ticking=false;
 window.addEventListener("scroll",()=>{
-  const sc = window.scrollY;
-  const blur = Math.min(6, sc / 200);
-
-  const hero = document.querySelector(".hero");
-  if(hero){
-    hero.style.backgroundPosition = `center ${sc*0.35}px`;
-    hero.style.filter = "none";
+  if(!ticking){
+    requestAnimationFrame(()=>{
+      const sc=window.scrollY;
+      document.querySelectorAll(".songket-bg").forEach(el=>{
+        el.style.backgroundPosition=`center ${sc*0.4}px`;
+      });
+      ticking=false;
+    });
+    ticking=true;
   }
-
-  document.querySelectorAll(".songket").forEach(el=>{
-    el.style.backgroundPosition = `center ${sc*0.6}px`;
-  });
 });
 </script>
 
@@ -1024,6 +1006,12 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
   },200);
 });
+</script>
+
+<script>
+document.querySelector(".qris-protect").onclick=()=>{
+  document.querySelector(".qris-protect").classList.toggle("open");
+}
 </script>
 
 <script>
